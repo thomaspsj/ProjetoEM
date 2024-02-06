@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Cadastrar aluno";
+}
+
+<h4>Novo Aluno</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form action="cadastrar" method="post" class="form-control">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 ">
+                       <label for="Matrícula"> Matrícula</label>
+                        <div class="col">
+                            <input name="SearchString" class="form-control" type="text" placeholder="" autocomplete="off"  maxlength="8" value="">
+                        </div>
+                    </div>
+                    <div class="col-9">
+                       <label for="Nome">Nome</label>
+                        <div class="col">
+                            <input name="SearchString" class="form-control" type="text" placeholder="" autocomplete="off"  maxlength="50" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                     <label for="Sexo"> Sexo</label>
+                        <div class="col">
+                            <input name="SearchString" class="form-control" type="text" placeholder="" autocomplete="off"  maxlength="9" value="">
+                        </div>
+                    </div>
+                    <div class="col">
+                     <label for="Nascimento">Nascimento</label>
+                        <div class="col">
+                            <input name="SearchString" class="form-control" type="text" placeholder="" autocomplete="off"  maxlength="10" value="">
+                        </div>
+                    </div>
+                    <div class="col">
+                     <label for="CPF">CPF</label>
+                        <div class="col">
+                            <input name="SearchString" class="form-control" type="text" placeholder="" autocomplete="off"  maxlength="11" value="">
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12 text-right">
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left" title="Voltar"></i>Voltar</a>
+                        <input type="submit" value="Salvar" class="btn btn-primary " asp-action="Cadastrar" onclick="return validaCampoMatricula(this), validaCampoNome(this), validadata()" />
+                        <a tabindex="3" class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="Cadastrar" title="Limpar"><i class="fa fa-broom "></i>Limpar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
