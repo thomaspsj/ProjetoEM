@@ -1,10 +1,9 @@
-﻿namespace EM.Domain
-{
-    using EM.Domain.Interface;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.ComponentModel.DataAnnotations;
-    using System.Security.Cryptography;
+﻿using EM.Domain.Interface;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
+namespace EM.Domain
+{
     namespace ProjetoEM.EM.Domain
     {
         public class Aluno : IEntidade
@@ -44,11 +43,10 @@
         public override int GetHashCode()
         {
             return HashCode.Combine(Matricula);
-
         }
 
         public override string ToString() => $"{Matricula} - {Nome}";
-    }
+        }
     }
 }
 

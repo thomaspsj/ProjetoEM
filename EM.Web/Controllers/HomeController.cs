@@ -9,6 +9,7 @@ namespace EM.Web.Controllers
 {
     public class HomeController : Controller
     {
+        //Uteis uteis = new Uteis();
         private readonly ILogger<HomeController> _logger;
         public readonly RepositorioAbstrato<Aluno> _rep;
 
@@ -69,9 +70,6 @@ namespace EM.Web.Controllers
 
         }
 
-    
-
-
         [HttpPost]
         public IActionResult Editar(Aluno getAluno)
         {
@@ -91,16 +89,14 @@ namespace EM.Web.Controllers
                 try
                 {
                     _rep.Atualize(aluno);
-                    ViewBag.Matricula = aluno.Matricula;
                     ViewBag.Mensagem = "Atualizado!";
+                    //return RedirectToAction("Index", "Home");
                     return View();
-                  //return RedirectToAction("Index", "Home");
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "Cadastrar");
-                    ViewBag.Mensagem = "Erro";
-                    return View();
+                    ViewBag.Mensagem = "erro";
                 }
             }
             else
@@ -108,9 +104,10 @@ namespace EM.Web.Controllers
                 ViewBag.Mensagem = "Favor preencha o nome!";
                 return View();
             }
+            return View();
         }
 
-            public IActionResult Cadastrar()
+        public IActionResult Cadastrar()
         {
             Aluno aluno = new Aluno();
 
@@ -163,7 +160,8 @@ namespace EM.Web.Controllers
                 {
                     _rep.Adicione(aluno);
                     ViewBag.Mensagem = "Cadastrado!";
-                    return View();
+                    return View(); 
+                    
                 }
                 catch (Exception ex)
                 {
@@ -177,7 +175,7 @@ namespace EM.Web.Controllers
                 return View();
             }
             return View();
-            return RedirectToAction("Cadastrar");
+            // return RedirectToAction("Cadastrar");
 
         }
 

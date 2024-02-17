@@ -14,6 +14,8 @@
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgWebGrease Condition=" '$(PkgWebGrease)' == '' ">C:\Users\thoma\.nuget\packages\webgrease\1.1.0</PkgWebGrease>
     <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\thoma\.nuget\packages\microsoft.codeanalysis.analyzers\3.3.2</PkgMicrosoft_CodeAnalysis_Analyzers>
+    <PkgFontAwesome Condition=" '$(PkgFontAwesome)' == '' ">C:\Users\thoma\.nuget\packages\fontawesome\4.0.3</PkgFontAwesome>
   </PropertyGroup>
 </Project>
