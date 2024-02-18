@@ -138,14 +138,35 @@ function onlynumber(evt) {
         if (theEvent.preventDefault) theEvent.preventDefault();
     }
 };
-function onlynumberData(evt) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode(key);
-    
-    var regex = /^[0-9/]+$/;
-    if (!regex.test(key)) {
-        theEvent.returnValue = false;
-        if (theEvent.preventDefault) theEvent.preventDefault();
-    }
+
+    function confirmDeletar() {
+        Swal.fire({
+            title: 'Quer mesmo deletar?',
+            text: 'Você não poderá reverter essa ação!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+        }).then((result) => {
+            // Se o usuário confirmar, chama a função deletar
+            if (result.isConfirmed) {
+                deletar();
+            }
+        });
+    // Retorna false para evitar a execução da ação padrão do link
+    return false;
+                                }
+
+function deletar(a)
+{
+    if (result.value == true)
+    {
+            swal(
+                'Deletado!',
+                'Deletado com Sucesso!',
+                'success'
+
+            )
+        }
+    })
 };

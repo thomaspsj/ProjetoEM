@@ -63,19 +63,62 @@
                             @Html.TextBoxFor(model => item.Nascimento, "{0:dd/MM/yyyy}", new { @class = " text-center  bg-transparent border-0  border-light col-8", @id = "inputNascimento", @readOnly = "true" })
                         </td>
                         <td scope="row" class="text-center col-2">
-                            <a asp-area="asdf" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula"
-                             onclick="return confirm('Tem ceteza que deseja excluir @item.ToString()?');"
+                            <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula" 
+                            onclick="return confirmDeletar();"
                             class="btn btn-danger btn-sm text-white " title="Deletar">
-                            <i class="fa fa-trash "></i></a>
+                                <i class="fa fa-trash "></i>
+
+                                <script>
+                                    function confirmDeletar() {
+                                        Swal.fire({
+                                            title: 'Tem certeza que deseja excluir?',
+                                            text: '@item.ToString()',
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Sim',
+                                            cancelButtonText: 'Cancelar'
+                                        }).then((result) => {
+                                            if (value == true) {
+                                                return true;
+                                            }
+                                            return false;
+                                        });
+                                        return false
+                                    }
+                                </script>
+                            </a>
                             <a asp-area="" asp-controller="Home" asp-action="Editar" asp-route-id="@item.Matricula"
                              class="btn btn-info btn-sm text-white"  title="Editar">
-                                <i class="fa fa-pen-to-square"></i>
+                                <i class="fa-regular fa-pen-to-square"></i>
                             </a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+    }
+    @if (@ViewBag.Mensagem == "Deletado")
+    {
+        <script>
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Deletado com sucesso!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        </script>
+    }
+    else if (@ViewBag.Mensagem == "erro")
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Algo deu errado...',
+                text: 'Contate o adminsitrador do sistema!',
+            })</script>
     }
 </div>
 
