@@ -45,11 +45,11 @@
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.Nascimento, new { @class = "control-label" })
-                        @Html.TextBoxFor(a => a.Nascimento, new { @class = "form-control", @id = "nasc", @type = "date", @required = "true", @onblur = "return validadata()" })
+                        @Html.TextBoxFor(a => a.Nascimento, new { @class = "form-control", @id = "nasc", @type = "Date", @required = "true", @onblur = "return validadata()", @min = "1900-01-01", @max = "2025-01-01" })
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.CPF, new { @class = "control-label" })
-                        @Html.TextBoxFor(a => a.CPF, new { @class = "form-control", @id = "cpf", @onblur = "return verificarCPF(this.value)", @placeholder = "Digite o cpf do aluno" })
+                        @Html.TextBoxFor(a => a.CPF, new { @class = "form-control", @id = "cpf", @onblur = "return verificarCPF(this.value)", @placeholder = "Digite o cpf do aluno"})
                     </div>
                 </div>
                 <br />
