@@ -8,45 +8,46 @@
 </div>
 <br />
 <div class="row">
-    <div class=" col-lg-12" style="text-align: right;">
-        <a tabindex="3" class="btn btn-primary  " asp-area="" asp-controller="Home" asp-action="Cadastrar"><i class="fa fa-user-plus"></i>Cadastrar</a>
-    </div>
+    
 </div>
 <br />
-<form asp-controller="Home" asp-action="Index" method="get" class="card card-sm">
-    <div class="card-body row no-gutters align-items-center">
-        <div class="col-auto">
-            <label class="font-weight-bold my-1 mr-2" for="inlineFormCustomSelectPref">Pesquisar por:</label>
-        </div>
-        <div class="col-auto">
-            <div class="btn-group d-flex" role="group">
-                <input type="radio" class="btn-check" name="pesquisePor" id="nome" value="nome" autocomplete="off" checked="">
-                <label class="btn btn-outline-primary" for="nome">Nome</label>
-                <input type="radio" class="btn-check" name="pesquisePor" id="matricula" value="matricula" autocomplete="off">
-                <label class="btn btn-outline-primary" for="matricula">Matricula</label>
+<form asp-controller="Home" asp-action="Index" method="get" class="col">
+    <div class="row border rounded p-3">
+        <label>Pesquise por:</label>
+        <div class="col-xl-3">
+            <div class="radio-buttons mb-3" >
+                <div class="btn-group d-flex" role="group">
+                    <input type="radio" class="btn-check" name="pesquisePor" id="nome" value="nome" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="nome" checked="nome">Nome</label>
+                    <input type="radio" class="btn-check" name="pesquisePor" id="matricula" value="matricula" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="matricula">Matrícula</label>
+                </div>
             </div>
         </div>
-        <div class="col">
-            <input name="SearchString" class="form-control" type="text" placeholder="" autocomplete="off" id="pesquisa" maxlength="30" value="">
+        <div class="col-sm-7" style="text-align: center">
+            <div class="input-group">
+                <input name="SearchString" class="form-control" type="text" placeholder="Nome ou número de matrícula" autocomplete="off" id="pesquisa" maxlength="30">
+                <button class="btn btn-primary" id="pesq" type="submit" value="Filter"><i class="fa fa-search" title="Pesquisar"></i></button>
+            </div>
         </div>
-        <div class="col-auto">
-            <button class="btn btn-primary" id="pesq" type="submit" value="Filter"><i class="fa fa-search " title="Pesquisar"></i>Buscar</button>
+        <div class=" col" style="text-align: right;">
+             <a tabindex="3" class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Cadastrar"><i class="fa fa-user-plus fa-beat"></i> Cadastrar</a>
         </div>
     </div>
 </form>
 <br />
-<div class="row ">
+<div class="row">
     @if (Model != null && Model.Any())
     {
-        <table class="table table-striped table-hover ">
-            <thead class="">
+        <table class="table table-striped table-hover border rounded p-3">
+            <thead class="bg-primary text-white  border rounded p-3">
                 <tr>
-                    <th scope="col" class="text-center col-1">Matricula</th>
+                    <th scope="col" class="text-center col-1">Matrícula</th>
                     <th scope="col" class="text-left col-4">Nome</th>
                     <th scope="col" class=" text-center col-2">Sexo</th>
                     <th scope="col" class=" text-center col-2">CPF</th>
                     <th scope="col" class=" text-center col-2">Nascimento</th>
-                    <th scope="col" class=" text-center col-1"></th>
+                    <th scope="col" class=" text-en col-2"></th>
                 </tr>
                 
             </thead>
@@ -63,35 +64,14 @@
                             @Html.TextBoxFor(model => item.Nascimento, "{0:dd/MM/yyyy}", new { @class = " text-center  bg-transparent border-0  border-light col-8", @id = "inputNascimento", @readOnly = "true" })
                         </td>
                         <td scope="row" class="text-center col-2">
-                            <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula" 
-                            onclick="return confirmDeletar();"
-                            class="btn btn-danger btn-sm text-white " title="Deletar">
-                                <i class="fa fa-trash "></i>
-
-                                <script>
-                                    function confirmDeletar() {
-                                        Swal.fire({
-                                            title: 'Tem certeza que deseja excluir?',
-                                            text: '@item.ToString()',
-                                            icon: 'warning',
-                                            showCancelButton: true,
-                                            confirmButtonColor: '#3085d6',
-                                            cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Sim',
-                                            cancelButtonText: 'Cancelar'
-                                        }).then((result) => {
-                                            if (value == true) {
-                                                return true;
-                                            }
-                                            return false;
-                                        });
-                                        return false
-                                    }
-                                </script>
+                            <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula"
+                             onclick="return confirm('Tem ceteza que deseja excluir @item.ToString()?');"
+                             class="btn btn-outline-danger btn-sm" title="Deletar">
+                             <i class="fa fa-trash "></i>
                             </a>
                             <a asp-area="" asp-controller="Home" asp-action="Editar" asp-route-id="@item.Matricula"
-                             class="btn btn-info btn-sm text-white"  title="Editar">
-                                <i class="fa-regular fa-pen-to-square"></i>
+                             class="btn btn-outline-primary btn-sm" type="button" title="Editar">
+                             <i class="fa-regular fa-pen-to-square"></i>
                             </a>
                         </td>
                     </tr>
@@ -99,7 +79,7 @@
             </tbody>
         </table>
     }
-    @if (@ViewBag.Mensagem == "Deletado")
+    @if (@ViewBag.Mensagem == "Deletado!")
     {
         <script>
             Swal.fire({
@@ -117,7 +97,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Algo deu errado...',
-                text: 'Contate o adminsitrador do sistema!',
+                text: 'Contate o administrador do sistema!',
             })</script>
     }
 </div>

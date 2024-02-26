@@ -7,17 +7,10 @@ using System.Diagnostics;
 
 namespace EM.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(ILogger<HomeController> logger, RepositorioAbstrato<Aluno> rep) : Controller
     {
-        //Uteis uteis = new Uteis();
-        private readonly ILogger<HomeController> _logger;
-        public readonly RepositorioAbstrato<Aluno> _rep;
-
-        public HomeController(ILogger<HomeController> logger, RepositorioAbstrato<Aluno> rep)
-        {
-            _logger = logger;
-            _rep = rep;
-        }
+        private readonly ILogger<HomeController> _logger = logger;
+        public readonly RepositorioAbstrato<Aluno> _rep = rep;
 
         public IActionResult Index(string searchString, string pesquisePor)
         {
@@ -90,7 +83,6 @@ namespace EM.Web.Controllers
                 {
                     _rep.Atualize(aluno);
                     ViewBag.Mensagem = "Atualizado!";
-                    //return RedirectToAction("Index", "Home");
                     return View();
                 }
                 catch (Exception ex)
@@ -175,7 +167,6 @@ namespace EM.Web.Controllers
                 return View();
             }
             return View();
-            // return RedirectToAction("Cadastrar");
 
         }
 
@@ -202,7 +193,8 @@ namespace EM.Web.Controllers
             try
             {
                 _rep.Remova(aluno);
-                ViewBag.Mensagem = "Deletado";
+                ViewBag.Mensagem = "Deletado!";
+                
             }
             catch (Exception ex)
             {
@@ -210,6 +202,7 @@ namespace EM.Web.Controllers
                 ViewBag.Mensagem = "Falha";
             }
             return RedirectToAction("Index", "Home");
+            
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

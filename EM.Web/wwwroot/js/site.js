@@ -1,9 +1,6 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-const inputCpf = document.querySelector('#cpf');
+﻿const inputCpf = document.querySelector('#cpf');
 const inputNasc = document.querySelector('#nasc');
+const inputMatricula = document.querySelector('#matricula');
 
 
 inputCpf.addEventListener('keypress', () => {
@@ -13,13 +10,6 @@ inputCpf.addEventListener('keypress', () => {
         inputCpf.value += '.';
     } else if (inputlength === 11) {
         inputCpf.value += '-';
-    }
-})
-
-inputNasc.addEventListener('keypress', () => {
-    let inputlength = inputNasc.value.length
-    if (inputlength === 2 || inputlength === 5) {
-        inputNasc.value += '/';
     }
 })
 
@@ -66,7 +56,7 @@ function verificarCPF(c) {
         if (dv.charAt(0) != d1) {
             alert("CPF " + cpfOriginal + " Inválido");
             v = true;
-            setTimeout(function () { $('#cpf').focus(); }, 1);// tava fazendo tesyte kkkkkk
+            setTimeout(function () { $('#cpf').focus(); }, 1);
             return false;
         }
 
@@ -122,40 +112,6 @@ function onlynumber(evt) {
     }
 };
 
-
-
-function deletar(a) {
-    new swal({
-        title: 'Quer mesmo deletar?',
-        text: a,
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, tenho certeza!',
-        cancelButtonText: 'Melhor não...'
-    }).then((result) => {
-        if (result.value == true) {
-            swal(
-                'Deletado!',
-                'Deletado com Sucesso!',
-                'success'
-
-            )
-        }
-    })
-};
-
-function alerta(type, title, mensage) {
-    Swal.fire({
-        type: type,
-        title: title,
-        text: mensage,
-        icon: 'warning',
-        showConfirmeButton: false,
-        timer: 1500,
-    })
-}
 function validaCampoNome() {
     const nomee = document.querySelector('#nome');
     console.log(nomee.length);
@@ -182,9 +138,8 @@ function validaCampoMatricula() {
             icon: 'warning',
             showConfirmeButton: false,
             timer: 1500,
-        })
+        });
         setTimeout(function () { $('#matricula').focus(); }, 1);
-        return false
+        return false;
     }
 }
-

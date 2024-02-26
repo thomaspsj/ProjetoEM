@@ -12,11 +12,9 @@ namespace EM.Web
 
         public IConfiguration Configuration { get; }
 
-        //injeção do repositório
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<RepositorioAbstrato<Aluno>, AlunoRepository>();
-            //services.AddTransient<IEntidade<Professor>, RepositorioProfessor>();
 
             services.AddRazorPages();
         }
