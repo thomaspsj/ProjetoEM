@@ -1,7 +1,4 @@
 ﻿const inputCpf = document.querySelector('#cpf');
-const inputNasc = document.querySelector('#nasc');
-const inputMatricula = document.querySelector('#matricula');
-
 
 inputCpf.addEventListener('keypress', () => {
     let inputlength = inputCpf.value.length
@@ -12,6 +9,7 @@ inputCpf.addEventListener('keypress', () => {
         inputCpf.value += '-';
     }
 })
+
 
 function verificarCPF(c) {
     var cpfOriginal = c;
@@ -79,67 +77,4 @@ function verificarCPF(c) {
         }
     }
 }
-function validadata(control) {
-    var data = document.getElementById("nasc").value; 
-    data = data.replace(/\//g, "-"); 
-    var data_array = data.split("-"); 
 
-    if (data_array[0].length != 4) {
-        data = data_array[2] + "-" + data_array[1] + "-" + data_array[0];
-    }
-
-    var hoje = new Date();
-    var nasc = new Date(data);
-    var idade = hoje.getFullYear() - nasc.getFullYear();
-    var m = hoje.getMonth() - nasc.getMonth();
-    if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
-
-    if (idade < 1 || idade > 119) {
-        alert("Data inválida!");
-        setTimeout(function () { $('#nasc').focus(); }, 1);
-        return false;
-    }
-    return false;
-};
-function onlynumber(evt) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode(key);
-    var regex = /^[0-9]+$/;
-    if (!regex.test(key)) {
-        theEvent.returnValue = false;
-        if (theEvent.preventDefault) theEvent.preventDefault();
-    }
-};
-
-function validaCampoNome() {
-    const nomee = document.querySelector('#nome');
-    console.log(nomee.length);
-    if (nomee.value.trim() == "" || nomee.length < 3) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Verifique os dados digitados!',
-            showConfirmButton: false,
-            timer: 1500
-        })
-        console.log(nomee.length);
-        setTimeout(function () { $('#nome').focus(); }, 1);
-        return false
-
-    }
-}
-function validaCampoMatricula() {
-    const matricula = document.querySelector('#matricula');
-    if (matricula.value.trim() == "" || matricula.value < 1) {
-        Swal.fire({
-            type: type,
-            title: title,
-            text: mensage,
-            icon: 'warning',
-            showConfirmeButton: false,
-            timer: 1500,
-        });
-        setTimeout(function () { $('#matricula').focus(); }, 1);
-        return false;
-    }
-}

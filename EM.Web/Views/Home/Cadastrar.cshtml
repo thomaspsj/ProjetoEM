@@ -27,17 +27,7 @@
                     </div>
                     <div class="col-10">
                         @Html.LabelFor(a => a.Nome, new { @class = "control-label" })
-                        @Html.TextBoxFor(a => a.Nome, new
-                            {
-                                @class = "form-control",
-                                @required = "true",
-                                @id = "nome",
-                                @autocomplete = "off",
-                                @placeholder = "Digite o nome do aluno",
-                                @minlength = "3",
-                                @maxlength = "100",
-                                @oninput = "this.value = this.value.toUpperCase()"
-                            })
+                        @Html.TextBoxFor(a => a.Nome, new { @class = "form-control", @required = "true", @id = "nome", @autocomplete = "off", @placeholder = "Digite o nome do aluno", @minlength = "3", @maxlength = "100"})
                     </div>
                 </div>
                 <div class="row">
@@ -47,7 +37,7 @@
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.Nascimento, new { @class = "control-label" })
-                        @Html.TextBoxFor(a => a.Nascimento, new { @class = "form-control", @id = "nasc", @type = "Date", @required = "true", @onblur = "return validadata()", @min = "1900-01-01", @max = DateTime.Now.ToString("yyyy-MM-dd") })
+                        @Html.TextBoxFor(a => a.Nascimento, new { @class = "form-control", @id = "nasc", @type = "Date", @required = "true", @min = "1900-01-01"  , @max = DateTime.Now.ToString("yyyy-MM-dd") })
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.CPF, new { @class = "control-label" })
@@ -58,7 +48,7 @@
                 <div class="row">
                     <div class="col-sm-12 text-right">
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger">Voltar</a>
-                        <input id="btnSalvar" type="submit" value="Salvar" class="btn btn-primary" asp-action="Cadastrar"/>
+                        <input id="btnSalvar" type="submit" value="Salvar" class="btn btn-primary" asp-action="Cadastrar" />
                         <a tabindex="3" class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="Cadastrar" title="Limpar">Limpar</a>
                     </div>
                     @if (@ViewBag.Mensagem == "Cadastrado!")
@@ -84,7 +74,6 @@
                                 timer: 1500
                             })
                         </script>
-
                     }
                 </div>
             </div>

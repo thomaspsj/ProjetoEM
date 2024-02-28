@@ -79,27 +79,6 @@
             </tbody>
         </table>
     }
-    @if (@ViewBag.Mensagem == "Deletado!")
-    {
-        <script>
-            Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'Deletado com sucesso!',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        </script>
-    }
-    else if (@ViewBag.Mensagem == "erro")
-    {
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Algo deu errado...',
-                text: 'Contate o administrador do sistema!',
-            })</script>
-    }
 </div>
 
 
