@@ -65,9 +65,9 @@
                         </td>
                         <td scope="row" class="text-center col-2">
                             <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula"
-                             onclick="return confirm('Tem ceteza que deseja excluir @item.ToString()?');"
-                             class="btn btn-outline-danger btn-sm" title="Deletar">
-                             <i class="fa fa-trash "></i>
+                               onclick="return confirm('Tem ceteza que deseja excluir @item.ToString()?');"
+                               class="btn btn-outline-danger btn-sm" title="Deletar">
+                                <i class="fa fa-trash "></i>
                             </a>
                             <a asp-area="" asp-controller="Home" asp-action="Editar" asp-route-id="@item.Matricula"
                              class="btn btn-outline-primary btn-sm" type="button" title="Editar">

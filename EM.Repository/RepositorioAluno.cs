@@ -11,14 +11,14 @@ namespace EM.Repository
         public override IEnumerable<Aluno> ObtenhaTodos()
         {
 
-            List<Aluno> alunos = new List<Aluno>();
+            List<Aluno> alunos = new();
 
             string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO";
             DataTable dt = Banco.Consulta(sql);
 
             foreach (DataRow item in dt.Rows)
             {
-                Aluno aluno = new Aluno()
+                Aluno aluno = new()
                 {
                     Matricula = item.Field<Int32>("MATRICULA"),
                     Nome = item.Field<string>("NOME"),
@@ -57,9 +57,9 @@ namespace EM.Repository
 
                 cmd.ExecuteNonQuery();
             }
-            catch (FbException ex)
+            catch (FbException)
             {
-                throw ex;
+                throw;
             }
             finally
             {
@@ -93,9 +93,9 @@ namespace EM.Repository
 
                 cmd.ExecuteNonQuery();
             }
-            catch (FbException fbex)
+            catch (FbException)
             {
-                throw fbex;
+                throw;
             }
             finally
             {
@@ -110,43 +110,41 @@ namespace EM.Repository
                 var sql = $"DELETE FROM ALUNO WHERE MATRICULA = '{aluno.Matricula}'";
                 Banco.Consulta(sql);
             }
-            catch (FbException fbex)
+            catch (FbException)
             {
-                throw fbex;
+                throw;
             }
 
         }
 
         public override Aluno? Obtenha(string id)
         {
-            Aluno alunoObtido = new Aluno();
+            Aluno alunoObtido = new();
             var mat = id;
 
-            using (FbConnection conexaoFireBird = Banco.ObtenhaConexao())
+            using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
+
+            string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = " + mat;
+            DataTable dt = Banco.Consulta(sql);
+
+            if (dt.Rows.Count > 0)
             {
-
-                string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = " + mat;
-                DataTable dt = Banco.Consulta(sql);
-
-                if (dt.Rows.Count > 0)
+                foreach (DataRow item in dt.Rows)
                 {
-                    foreach (DataRow item in dt.Rows)
+                    Aluno aluno = new()
                     {
-                        Aluno aluno = new Aluno()
-                        {
-                            Matricula = item.Field<Int32>("MATRICULA"),
-                            Nome = item.Field<string>("NOME"),
-                            Sexo = item.Field<Sexo>("SEXO"),
-                            CPF = item.Field<string>("CPF"),
-                            Nascimento = item.Field<DateTime>("NASCIMENTO"),
-                        };
+                        Matricula = item.Field<Int32>("MATRICULA"),
+                        Nome = item.Field<string>("NOME"),
+                        Sexo = item.Field<Sexo>("SEXO"),
+                        CPF = item.Field<string>("CPF"),
+                        Nascimento = item.Field<DateTime>("NASCIMENTO"),
+                    };
 
-                        return alunoObtido = aluno;
-                    }
+                    return alunoObtido = aluno;
                 }
-
-                return null;
             }
+
+            return null;
         }
     }
 }

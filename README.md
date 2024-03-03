@@ -16,7 +16,7 @@ Este projeto visa desenvolver um sistema web para o cadastro de alunos, conforme
 
 - ASP.NET MVC (linguagem C#)
 - SGBD (FIREBIRD) - Sem utilização de framework ORM
-   - [Download do Firebird](https://firebirdsql.org/en/firebird-4-0)
+- [Download do Firebird](https://firebirdsql.org/en/firebird-4-0)
 - HTML
 - CSS (Bootstrap)
 - JS vanilla
@@ -29,6 +29,8 @@ Este projeto visa desenvolver um sistema web para o cadastro de alunos, conforme
 - Downcast
 - Upcast
 
+- Não utilizar nenhum ORM. Ex.: Entity Framework, Dapper, NHibernate
+
 ## Requisitos do Projeto
 
 - **Tela Inicial:** Exibir todos os alunos cadastrados (Consulte a imagem: AlunosCadastrados.png)
@@ -38,3 +40,23 @@ Este projeto visa desenvolver um sistema web para o cadastro de alunos, conforme
 - **Campo NOME:** Obrigatório, alinhado à esquerda, com 3 a 100 caracteres
 - **Campo SEXO:** Opções - Masculino e Feminino, somente leitura
 - **Pesquisa de Aluno:** Por MATRÍCULA ou NOME
+
+##LINKS DE APOIO:
+
+- **Documentação NET**
+https://learn.microsoft.com/pt-br/dotnet/fundamentals/
+
+- **Razor page**
+https://learn.microsoft.com/pt-br/aspnet/core/razor-pages/?view=aspnetcore-8.0&tabs=visual-studio
+https://www.macoratti.net/18/02/aspcore_rzpg1.htm
+
+- **Bootstrap 5**
+https://getbootstrap.com/docs/5.0/getting-started/introduction/
+
+- **JS**
+https://developer.mozilla.org/pt-BR/docs/Web/JavaScript
+https://www.w3schools.com/js/
+
+- **HTML/CSS**
+https://www.w3schools.com/html/html_css.asp
+https://www.w3schools.com/html/
