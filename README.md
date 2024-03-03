@@ -28,7 +28,6 @@ Este projeto visa desenvolver um sistema web para o cadastro de alunos, conforme
 - Conversão de Tipos
 - Downcast
 - Upcast
-
 - Não utilizar nenhum ORM. Ex.: Entity Framework, Dapper, NHibernate
 
 ## Requisitos do Projeto
