@@ -1,6 +1,6 @@
 ﻿namespace EM.Domain.Interface
 {
-    public class IEntidade
+    public interface IEntidade
     {
     }
 }

@@ -7,7 +7,6 @@ namespace EM.Repository
 {
     public class AlunoRepository : RepositorioAbstrato<Aluno>
     {
-        //FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao();
         public override IEnumerable<Aluno> ObtenhaTodos()
         {
 

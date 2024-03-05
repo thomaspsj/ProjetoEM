@@ -49,7 +49,7 @@ namespace EM.Web.Controllers
         }
 
         [HttpPost]
-        public string Index(string searchString, bool notUsed)
+        public string Index(string searchString)
         {
             return "From [HttpPost]Index: filter on " + searchString;
         }
