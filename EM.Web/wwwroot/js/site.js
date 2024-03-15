@@ -10,7 +10,6 @@ inputCpf.addEventListener('keypress', () => {
     }
 })
 
-
 function verificarCPF(c) {
     var cpfOriginal = c;
     if (c.length === 14) {

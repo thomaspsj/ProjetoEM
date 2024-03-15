@@ -7,10 +7,12 @@ namespace EM.Repository
 {
     public class AlunoRepository : RepositorioAbstrato<Aluno>
     {
+
+
         public override IEnumerable<Aluno> ObtenhaTodos()
         {
 
-            List<Aluno> alunos = new();
+            List<Aluno> alunos = [];
 
             string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO";
             DataTable dt = Banco.Consulta(sql);

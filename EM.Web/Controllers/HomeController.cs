@@ -54,121 +54,93 @@ namespace EM.Web.Controllers
             return "From [HttpPost]Index: filter on " + searchString;
         }
 
-        [HttpGet]
-        public IActionResult Editar(string id)
+       
+
+        public IActionResult Cadastro(string? id)
         {
-            var aluno = _rep.Obtenha(id);
+            Aluno aluno;
+            if (id != null)
+            {
+                aluno = _rep.Obtenha(id);
+                return View(aluno);
 
+            }
+            else
+            {
+                aluno = new();
+                int getUltimaMatriculaMaisUm = 0;
+
+                if (!string.IsNullOrEmpty(_rep.ObtenhaTodos().Max(a => a.Matricula.ToString())))
+                {
+                    getUltimaMatriculaMaisUm = _rep.ObtenhaTodos().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.ObtenhaTodos().Max(a => a.Matricula) + 1;
+                }
+                else
+                {
+                    getUltimaMatriculaMaisUm = 1;
+                }
+
+                aluno.Sexo = Sexo.Masculino;
+                aluno.Matricula = getUltimaMatriculaMaisUm;
+            }
             return View(aluno);
-
         }
 
+
         [HttpPost]
-        public IActionResult Editar(Aluno getAluno)
+        public IActionResult Cadastro(Aluno Aluno)
         {
+            var alunoExiste = _rep.Obtenha(Aluno.Matricula.ToString());
 
-            var aluno = new Aluno()
+            if (alunoExiste == null)
             {
-
-                Matricula = getAluno.Matricula,
-                Nome = getAluno.Nome?.ToUpper().Trim(),
-                Sexo = getAluno.Sexo,
-                Nascimento = getAluno.Nascimento,
-                CPF = getAluno.CPF,
-            };
-
-            if (getAluno.Matricula == aluno.Matricula && !string.IsNullOrWhiteSpace(aluno.Nome))
-            {
-                try
+                var aluno = new Aluno()
                 {
-                    _rep.Atualize(aluno);
-                    ViewBag.Mensagem = "Atualizado!";
+                    Matricula = Aluno.Matricula,
+                    Nome = Aluno.Nome?.ToUpper().Trim(),
+                    Sexo = Aluno.Sexo,
+                    Nascimento = Aluno.Nascimento,
+                    CPF = Aluno.CPF,
+                };
+                if (Aluno.Matricula == aluno.Matricula)
+                {
+                      _rep.Adicione(aluno);
+                        ViewBag.Mensagem = "Cadastrado!";
+                }
+                return View();
+            }
+            else
+            {
+                var aluno = new Aluno()
+                {
+                    Matricula = Aluno.Matricula,
+                    Nome = Aluno.Nome?.ToUpper().Trim(),
+                    Sexo = Aluno.Sexo,
+                    Nascimento = Aluno.Nascimento,
+                    CPF = Aluno.CPF,
+                };
+                if (aluno.Matricula == aluno.Matricula && !string.IsNullOrWhiteSpace(aluno.Nome))
+                {
+                    try
+                    {
+                        _rep.Atualize(aluno);
+                        ViewBag.Mensagem = "Atualizado!";
+                        return View();
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Cadastrar");
+                        ViewBag.Mensagem = "erro";
+                    }
+                }
+                else
+                {
+                    ViewBag.Mensagem = "Favor preencha o nome!";
                     return View();
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Cadastrar");
-                    ViewBag.Mensagem = "erro";
-                }
-            }
-            else
-            {
-                ViewBag.Mensagem = "Favor preencha o nome!";
                 return View();
             }
-            return View();
         }
 
-        public IActionResult Cadastrar()
-        {
-            Aluno aluno = new Aluno();
-
-            int getUltimaMatriculaMaisUm = 0;
-
-            if (!string.IsNullOrEmpty(_rep.ObtenhaTodos().Max(a => a.Matricula.ToString())))
-            {
-                getUltimaMatriculaMaisUm = _rep.ObtenhaTodos().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.ObtenhaTodos().Max(a => a.Matricula) + 1;
-            }
-            else
-            {
-                getUltimaMatriculaMaisUm = 1;
-            }
-
-            aluno.Sexo = Sexo.Masculino;
-
-            aluno.Matricula = getUltimaMatriculaMaisUm;
-
-            return View(aluno);
-        }
-
-
-        [HttpPost]
-        public IActionResult Cadastrar(Aluno getAluno)
-        {
-            int getUltimaMatriculaMaisUm = 0;
-
-            if (!string.IsNullOrEmpty(_rep.ObtenhaTodos().Max(a => a.Matricula.ToString())))
-            {
-                getUltimaMatriculaMaisUm = _rep.ObtenhaTodos().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.ObtenhaTodos().Max(a => a.Matricula) + 1;
-            }
-            else
-            {
-                getUltimaMatriculaMaisUm = 1;
-            }
-
-            var aluno = new Aluno()
-            {
-                Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : 1,
-                Nome = getAluno.Nome?.ToUpper().Trim(),
-                Sexo = getAluno.Sexo,
-                Nascimento = getAluno.Nascimento,
-                CPF = getAluno.CPF,
-            };
-            Aluno? verificaSeMatriculaExiste = _rep.Obtenha(getAluno.Matricula.ToString());
-
-            if (verificaSeMatriculaExiste == null && !string.IsNullOrWhiteSpace(aluno.Nome))
-            {
-                try
-                {
-                    _rep.Adicione(aluno);
-                    ViewBag.Mensagem = "Cadastrado!";
-                    return View(); 
-                    
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Cadastrar");
-                    ViewBag.Mensagem = "erro";
-                }
-            }
-            else
-            {
-                ViewBag.Mensagem = "erro";
-                return View();
-            }
-            return View();
-
-        }
 
         public IActionResult Deletar(string id)
         {
@@ -194,7 +166,7 @@ namespace EM.Web.Controllers
             {
                 _rep.Remova(aluno);
                 ViewBag.Mensagem = "Deletado!";
-                
+
             }
             catch (Exception ex)
             {
@@ -202,7 +174,7 @@ namespace EM.Web.Controllers
                 ViewBag.Mensagem = "Falha";
             }
             return RedirectToAction("Index", "Home");
-            
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
