@@ -118,10 +118,10 @@ namespace EM.Repository
 
         }
 
-        public override Aluno? Obtenha(string id)
+        public override Aluno? Obtenha(string obj)
         {
             Aluno alunoObtido = new();
-            var mat = id;
+            var mat = obj;
 
             using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
 

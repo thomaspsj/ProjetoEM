@@ -38,13 +38,67 @@
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.Nascimento, new { @class = "control-label" })
-                        @Html.TextBoxFor(a => a.Nascimento, new { @class = "form-control", @id = "nascimento", @type = "Date", @required = "true", @min = "1900-01-01", @max = DateTime.Now.ToString("yyyy-MM-dd") })
+                        @Html.TextBoxFor(a => a.Nascimento, new { @class = "form-control", @id = "nasc", @type = "Date", @required = "true", @min = "1900-01-01", @max = DateTime.Now.ToString("yyyy-MM-dd") })
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.CPF, new { @class = "control-label" })
                         @Html.TextBoxFor(a => a.CPF, new { @class = "form-control", @id = "cpf", @onblur = "return verificarCPF(this.value)", @placeholder = "Digite o cpf do aluno" })
                     </div>
                 </div>
+                <hr />
+                <h5>Endereço</h5>
+                <div class="row">
+                    <div class="col-3">
+                        <label for="CEP"> CEP </label>
+                        <input class="form-control" id="cep" onblur="buscaCEP()">
+                    </div>
+                    <div class="col">
+                        <label for="Logradouro"> Logradouro </label>
+                        <input class="form-control" id="logradouro">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <label for="Bairro"> Bairro </label>
+                        <input class="form-control" id="bairro">
+                    </div>
+                    <div class="col">
+                        <label for="Cidade"> Cidade </label>
+                        <input class="form-control" id="cidade">
+                    </div>
+                    <div class="col-1">
+                        <label for="UF"> UF </label>
+                        <input class="form-control" id="uf">
+                    </div>
+                </div>
+
+                <script>
+                    function buscaCEP() {
+                        var cep = document.getElementById('cep').value;
+                        cep = cep.replace(/\D/g, ''); // Remove caracteres não numéricos
+                        if (cep.length != 8) {
+                            return;
+                        }
+
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', 'https://viacep.com.br/ws/' + cep + '/json/');
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                var endereco = JSON.parse(xhr.responseText);
+                                if (!endereco.erro) {
+                                    document.getElementById('logradouro').value = endereco.logradouro;
+                                    document.getElementById('bairro').value = endereco.bairro;
+                                    document.getElementById('cidade').value = endereco.localidade;
+                                    document.getElementById('uf').value = endereco.uf;
+                                } else {
+                                    alert('CEP não encontrado');
+                                }
+                            }
+                        };
+                        xhr.send();
+                    }
+                </script>
+
                 <br />
                 <div class="row">
                     <div class="col-sm-12 text-right">

@@ -100,7 +100,8 @@ namespace EM.Web.Controllers
                     Sexo = Aluno.Sexo,
                     Nascimento = Aluno.Nascimento,
                     CPF = Aluno.CPF,
-                };
+                    
+            };
                 if (Aluno.Matricula == aluno.Matricula)
                 {
                       _rep.Adicione(aluno);
