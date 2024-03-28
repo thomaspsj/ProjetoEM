@@ -49,26 +49,26 @@
                 <h5>Endereço</h5>
                 <div class="row">
                     <div class="col-3">
-                        <label for="CEP"> CEP </label>
-                        <input class="form-control" id="cep" onblur="buscaCEP()">
+                        @Html.LabelFor(a => a.CEP, new{ @class = "control-label"})
+                        @Html.TextBoxFor(a => a.CEP, new { @class = "form-control", id = "cep", onblur = "buscaCEP()" })
                     </div>
                     <div class="col">
-                        <label for="Logradouro"> Logradouro </label>
-                        <input class="form-control" id="logradouro">
+                        @Html.LabelFor(a => a.Logradouro, new { @class = "control-label" })
+                        @Html.TextBoxFor(a => a.Logradouro, new { @class = "form-control", id = "logradouro" })
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-3">
-                        <label for="Bairro"> Bairro </label>
-                        <input class="form-control" id="bairro">
+                        @Html.LabelFor(a => a.Bairro, new { @class = "control-label" })
+                        @Html.TextBoxFor(a => a.Bairro, new { @class = "form-control", id = "bairro" })
                     </div>
                     <div class="col">
-                        <label for="Cidade"> Cidade </label>
-                        <input class="form-control" id="cidade">
+                        @Html.LabelFor(a => a.Cidade, new { @class = "control-label" })
+                        @Html.TextBoxFor(a => a.Cidade, new { @class = "form-control", id = "cidade" })
                     </div>
                     <div class="col-1">
-                        <label for="UF"> UF </label>
-                        <input class="form-control" id="uf">
+                        @Html.LabelFor(a => a.Estado, new { @class = "control-label" })
+                        @Html.TextBoxFor(a => a.Estado, new { @class = "form-control", id = "uf" })
                     </div>
                 </div>
 

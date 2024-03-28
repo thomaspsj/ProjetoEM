@@ -31,6 +31,27 @@ namespace EM.Domain
             [MaxLength(14)]
             public string? CPF { get; set; }
 
+            [Display(Name = "CEP")]
+            [Column("CEP")]
+            [MaxLength(10)]
+            public string CEP { get; set; }
+
+            [Display(Name = "Logradouro")]
+            [Column("LOGRADOURO")]
+            public string Logradouro { get; set; }
+
+            [Display(Name = "Bairro")]
+            [Column("BAIRRO")]
+            public string Bairro { get; set; }
+
+            [Display(Name = "Cidade")]
+            [Column("CIDADE")]
+            public string Cidade { get; set; }
+
+            [Display(Name = "Estado")]
+            [Column("ESTADO")]
+            public string Estado { get; set; }
+
             public override bool Equals(object? obj)
             {
                 return obj is Aluno aluno &&

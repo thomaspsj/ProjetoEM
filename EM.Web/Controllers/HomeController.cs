@@ -98,8 +98,14 @@ namespace EM.Web.Controllers
                     Matricula = Aluno.Matricula,
                     Nome = Aluno.Nome?.ToUpper().Trim(),
                     Sexo = Aluno.Sexo,
-                    Nascimento = Aluno.Nascimento,
                     CPF = Aluno.CPF,
+                    Nascimento = Aluno.Nascimento,
+                    CEP = Aluno.CEP,
+                    Logradouro = Aluno.Logradouro,
+                    Bairro = Aluno.Bairro,
+                    Cidade = Aluno.Cidade,
+                    Estado = Aluno.Estado,
+
                     
             };
                 if (Aluno.Matricula == aluno.Matricula)
@@ -116,8 +122,13 @@ namespace EM.Web.Controllers
                     Matricula = Aluno.Matricula,
                     Nome = Aluno.Nome?.ToUpper().Trim(),
                     Sexo = Aluno.Sexo,
-                    Nascimento = Aluno.Nascimento,
                     CPF = Aluno.CPF,
+                    Nascimento = Aluno.Nascimento,
+                    CEP = Aluno.CEP,
+                    Logradouro = Aluno.Logradouro,
+                    Bairro = Aluno.Bairro,
+                    Cidade = Aluno.Cidade,
+                    Estado = Aluno.Estado,
                 };
                 if (aluno.Matricula == aluno.Matricula && !string.IsNullOrWhiteSpace(aluno.Nome))
                 {

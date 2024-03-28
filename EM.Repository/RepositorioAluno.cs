@@ -40,7 +40,7 @@ namespace EM.Repository
             try
             {
                 conexaoFireBird.Open();
-                string mSQL = "INSERT INTO ALUNO (MATRICULA, NOME, SEXO, CPF, NASCIMENTO) VALUES (@MATRICULA, @NOME, @SEXO, @CPF, @NASCIMENTO)";
+                string mSQL = "INSERT INTO ALUNO (MATRICULA, NOME, SEXO, CPF, NASCIMENTO, CEP, LOGRADOURO, BAIRRO, CIDADE, ESTADO) VALUES (@MATRICULA, @NOME, @SEXO, @CPF, @NASCIMENTO, @CEP, @LOGRADOURO, @BAIRRO, @CIDADE, @ESTADO)";
                 FbCommand cmd = new(mSQL, conexaoFireBird);
 
                 cmd.Parameters.Add("@MATRICULA", SqlDbType.Int);
@@ -48,12 +48,22 @@ namespace EM.Repository
                 cmd.Parameters.Add("@SEXO", SqlDbType.VarChar);
                 cmd.Parameters.Add("@CPF", SqlDbType.VarChar);
                 cmd.Parameters.Add("@NASCIMENTO", SqlDbType.DateTime);
+                cmd.Parameters.Add("@CEP", SqlDbType.DateTime);
+                cmd.Parameters.Add("@LOGRADOURO", SqlDbType.VarChar);
+                cmd.Parameters.Add("@BAIRRO", SqlDbType.VarChar);
+                cmd.Parameters.Add("@CIDADE", SqlDbType.VarChar);
+                cmd.Parameters.Add("@ESTADO", SqlDbType.Char);
 
                 cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
                 cmd.Parameters["@NOME"].Value = aluno.Nome;
                 cmd.Parameters["@SEXO"].Value = aluno.Sexo;
                 cmd.Parameters["@CPF"].Value = aluno.CPF;
                 cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
+                cmd.Parameters["@CEP"].Value = aluno.CEP;
+                cmd.Parameters["@LOGRADOURO"].Value = aluno.Logradouro;
+                cmd.Parameters["@BAIRRO"].Value = aluno.Bairro;
+                cmd.Parameters["@CIDADE"].Value = aluno.Cidade;
+                cmd.Parameters["@ESTADO"].Value = aluno.Estado;
 
 
                 cmd.ExecuteNonQuery();
@@ -75,7 +85,7 @@ namespace EM.Repository
             try
             {
                 conexaoFireBird.Open();
-                string mSQL = "UPDATE ALUNO SET NOME = @NOME, SEXO = @SEXO, CPF = @CPF, NASCIMENTO = @NASCIMENTO WHERE MATRICULA = @MATRICULA";
+                string mSQL = "UPDATE ALUNO SET NOME = @NOME, SEXO = @SEXO, CPF = @CPF, NASCIMENTO = @NASCIMENTO, CEP = @CEP, LOGRADOURO = @LOGRADOURO, BAIRRO = @BAIRRO, CIDADE = @CIDADE, ESTADO = @ESTADO WHERE MATRICULA = @MATRICULA";
 
                 FbCommand cmd = new(mSQL, conexaoFireBird);
 
@@ -84,12 +94,22 @@ namespace EM.Repository
                 cmd.Parameters.Add("@SEXO", SqlDbType.VarChar);
                 cmd.Parameters.Add("@CPF", SqlDbType.VarChar);
                 cmd.Parameters.Add("@NASCIMENTO", SqlDbType.DateTime);
+                cmd.Parameters.Add("@CEP", SqlDbType.DateTime);
+                cmd.Parameters.Add("@LOGRADOURO", SqlDbType.VarChar);
+                cmd.Parameters.Add("@BAIRRO", SqlDbType.VarChar);
+                cmd.Parameters.Add("@CIDADE", SqlDbType.VarChar);
+                cmd.Parameters.Add("@ESTADO", SqlDbType.Char);
 
                 cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
                 cmd.Parameters["@NOME"].Value = aluno.Nome;
                 cmd.Parameters["@SEXO"].Value = aluno.Sexo;
                 cmd.Parameters["@CPF"].Value = aluno.CPF;
                 cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
+                cmd.Parameters["@CEP"].Value = aluno.CEP;
+                cmd.Parameters["@LOGRADOURO"].Value = aluno.Logradouro;
+                cmd.Parameters["@BAIRRO"].Value = aluno.Bairro;
+                cmd.Parameters["@CIDADE"].Value = aluno.Cidade;
+                cmd.Parameters["@ESTADO"].Value = aluno.Estado;
 
 
                 cmd.ExecuteNonQuery();
@@ -125,7 +145,7 @@ namespace EM.Repository
 
             using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
 
-            string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = " + mat;
+            string sql = "SELECT MATRICULA, NOME, SEXO,  CPF, NASCIMENTO, CEP, LOGRADOURO, BAIRRO, CIDADE, ESTADO FROM ALUNO WHERE MATRICULA = " + mat;
             DataTable dt = Banco.Consulta(sql);
 
             if (dt.Rows.Count > 0)
@@ -139,6 +159,9 @@ namespace EM.Repository
                         Sexo = item.Field<Sexo>("SEXO"),
                         CPF = item.Field<string>("CPF"),
                         Nascimento = item.Field<DateTime>("NASCIMENTO"),
+                        
+
+
                     };
 
                     return alunoObtido = aluno;
