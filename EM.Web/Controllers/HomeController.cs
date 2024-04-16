@@ -132,26 +132,25 @@ namespace EM.Web.Controllers
                 };
                 if (aluno.Matricula == aluno.Matricula && !string.IsNullOrWhiteSpace(aluno.Nome))
                 {
-                    try
-                    {
+                   
                         _rep.Atualize(aluno);
-                        ViewBag.Mensagem = "Atualizado!";
-                        return View();
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError(ex, "Cadastrar");
-                        ViewBag.Mensagem = "erro";
-                    }
+
+                    ViewBag.Mensagem = "Atualizado!";
+                    return View();
+                    // return RedirectToAction("Index","Home");
+                   
+
                 }
                 else
                 {
                     ViewBag.Mensagem = "Favor preencha o nome!";
                     return View();
                 }
-                return View();
+               
             }
         }
+
+
 
 
         public IActionResult Deletar(string id)

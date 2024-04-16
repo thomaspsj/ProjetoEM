@@ -77,3 +77,21 @@ function verificarCPF(c) {
     }
 }
 
+
+function validaCampoMatricula()
+{
+    const matriculaInput = document.getElementById('matricula');
+    const matriculaValue = matriculaInput.value.trim();
+
+    if (matriculaValue == '')
+    {
+        // Campo de matrícula preenchido, permitir edição
+        matriculaInput.removeAttribute('readonly');
+    }
+    else
+    {
+        // Campo de matrícula vazio, bloquear edição
+        matriculaInput.setAttribute('readonly', true);
+    }
+
+}
