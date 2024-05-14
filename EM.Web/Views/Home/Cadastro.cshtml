@@ -21,22 +21,6 @@
                     <div class="col">
                         @Html.LabelFor(a => a.Matricula, new { @class = "control-label" })
                         @Html.TextBoxFor(a => a.Matricula, new { @class = "form-control", @required = "true", @style = "text-align:right", @minlength = "1", @maxlength = "9", @onpaste = "return false", @ondrop = "return false", @id = "matricula", @oninput = "formatarMatricula()", @onblur = "validaCampoMatricula()", @onfocus = "validaCampoMatricula()" })
-                        <script>
-                            // Função para formatar o valor da matrícula (apenas dígitos)
-                            function formatarMatricula() 
-                            {
-                                const inputMatricula = document.getElementById('matricula');
-                                let currentValue = inputMatricula.value;
-                                currentValue = currentValue.replace(/\D/g, ''); // Remove caracteres não numéricos
-                                inputMatricula.value = currentValue;
-                            }
-
-                            // Executar a formatação ao carregar a página
-                            formatarMatricula();
-
-                            // Executar a validação ao carregar a página
-                            validaCampoMatricula();
-                        </script>
                     </div>
                     <div class="col-10">
                         @Html.LabelFor(a => a.Nome, new { @class = "control-label" })
@@ -151,14 +135,14 @@
                             })
                         </script>
                     }
-                    else if (@ViewBag.Mensagem == "erro!")
+                    else if (@ViewBag.Mensagem == "Matrícula em uso!")
                     {
                         <script>
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Erro!',
+                                title: 'Matrícula em uso!',
                                 showConfirmButton: false,
-                                timer: 1500
+                                timer: 2000
                             })
                         </script>
                     }

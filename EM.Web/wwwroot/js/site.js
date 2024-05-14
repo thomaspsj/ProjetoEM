@@ -78,19 +78,20 @@ function verificarCPF(c) {
 }
 
 
-function validaCampoMatricula()
-{
+
+
+function validaCampoMatricula() {
+    const nomeInput = document.getElementById('nome');
+    const nomeValue = nomeInput.value.trim();
     const matriculaInput = document.getElementById('matricula');
     const matriculaValue = matriculaInput.value.trim();
 
-    if (matriculaValue == '')
-    {
-        // Campo de matrícula preenchido, permitir edição
+    if (nomeValue == '') {
+
         matriculaInput.removeAttribute('readonly');
     }
-    else
-    {
-        // Campo de matrícula vazio, bloquear edição
+    else {
+
         matriculaInput.setAttribute('readonly', true);
     }
 

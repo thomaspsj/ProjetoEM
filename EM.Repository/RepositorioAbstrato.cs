@@ -10,7 +10,7 @@ namespace EM.Repository
         public abstract void Atualize(T obj);
         public abstract IEnumerable<T> ObtenhaTodos();
         public abstract T Obtenha(string obj);
-
-       
+        public abstract T ObtenhaMatricula(int obj);
+        
     }
 }

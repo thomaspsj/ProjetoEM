@@ -3,6 +3,7 @@ using EM.Domain.ProjetoEM.EM.Domain;
 using EM.Repository;
 using EM.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics;
 
 namespace EM.Web.Controllers
@@ -90,7 +91,13 @@ namespace EM.Web.Controllers
         public IActionResult Cadastro(Aluno Aluno)
         {
             var alunoExiste = _rep.Obtenha(Aluno.Matricula.ToString());
+            object alunoMatricula = _rep.ObtenhaMatricula(Aluno.Matricula);
 
+            /*if(alunoMatricula != null)
+            {
+                ViewBag.Mensagem = "Matrícula em uso!";
+                return View();
+            }*/
             if (alunoExiste == null)
             {
                 var aluno = new Aluno()
@@ -107,7 +114,7 @@ namespace EM.Web.Controllers
                     Estado = Aluno.Estado,
 
                     
-            };
+                };
                 if (Aluno.Matricula == aluno.Matricula)
                 {
                       _rep.Adicione(aluno);
@@ -149,8 +156,6 @@ namespace EM.Web.Controllers
                
             }
         }
-
-
 
 
         public IActionResult Deletar(string id)

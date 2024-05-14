@@ -94,7 +94,7 @@ namespace EM.Repository
                 cmd.Parameters.Add("@SEXO", SqlDbType.VarChar);
                 cmd.Parameters.Add("@CPF", SqlDbType.VarChar);
                 cmd.Parameters.Add("@NASCIMENTO", SqlDbType.DateTime);
-                cmd.Parameters.Add("@CEP", SqlDbType.DateTime);
+                cmd.Parameters.Add("@CEP", SqlDbType.VarChar);
                 cmd.Parameters.Add("@LOGRADOURO", SqlDbType.VarChar);
                 cmd.Parameters.Add("@BAIRRO", SqlDbType.VarChar);
                 cmd.Parameters.Add("@CIDADE", SqlDbType.VarChar);
@@ -159,7 +159,13 @@ namespace EM.Repository
                         Sexo = item.Field<Sexo>("SEXO"),
                         CPF = item.Field<string>("CPF"),
                         Nascimento = item.Field<DateTime>("NASCIMENTO"),
-                        
+                        CEP = item.Field<string>("CEP"),
+                        Logradouro = item.Field<string>("LOGRADOURO"),
+                        Bairro = item.Field<string>("BAIRRO"),
+                        Cidade = item.Field<string>("CIDADE"),
+                        Estado = item.Field<string>("ESTADO"),
+
+
 
 
                     };
@@ -170,6 +176,34 @@ namespace EM.Repository
 
             return null;
         }
+
+        public override Aluno? ObtenhaMatricula(int obj)
+        {
+            Aluno alunoObtido = new();
+            var mat = obj;
+
+            using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
+
+            string sql = "SELECT MATRICULA FROM ALUNO WHERE MATRICULA = " + mat;
+            DataTable dt = Banco.Consulta(sql);
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow item in dt.Rows)
+                {
+                    Aluno aluno = new()
+                    {
+                        Matricula = item.Field<Int32>("MATRICULA"),
+                    };
+
+                    return alunoObtido = aluno;
+                }
+            }
+
+            return null;
+        }
+
+
     }
 }
 
