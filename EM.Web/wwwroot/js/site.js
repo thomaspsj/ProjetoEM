@@ -96,3 +96,33 @@ function validaCampoMatricula() {
     }
 
 }
+
+function buscaCEP()
+{
+    var cep = document.getElementById('cep').value;
+    cep = cep.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (cep.length != 8)
+    {
+     return;
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://viacep.com.br/ws/' + cep + '/json/');
+    xhr.onreadystatechange = function ()
+    {
+        if (xhr.readyState === 4 && xhr.status === 200)
+        {
+                                var endereco = JSON.parse(xhr.responseText);
+            if (!endereco.erro)
+            {
+                 document.getElementById('logradouro').value = endereco.logradouro;
+                 document.getElementById('bairro').value = endereco.bairro;
+                 document.getElementById('cidade').value = endereco.localidade;
+                 document.getElementById('uf').value = endereco.uf;
+            } else
+            {
+                alert('CEP não encontrado');
+            }
+        }
+    };
+  xhr.send();
+}

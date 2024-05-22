@@ -61,7 +61,7 @@
                         <td scope="row" class=" text-center">@item.Sexo</td>
                         <td scope="row" id="cpf" class=" text-center">@item.CPF</td>
                         <td scope="row" class=" text-center">
-                            @Html.TextBoxFor(model => item.Nascimento, "{0:dd/MM/yyyy}", new { @class = " text-center  bg-transparent border-0  border-light col-8", @id = "inputNascimento", @readOnly = "true" })
+                            @Html.TextBoxFor(model => item.Nascimento, "{0:dd/MM/yyyy}", new { @class = "text-center  bg-transparent border-0  border-light col-8", @id = "inputNascimento", @readOnly = "true" })
                         </td>
                         <td scope="row" class="text-center col-2">
                             <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula"

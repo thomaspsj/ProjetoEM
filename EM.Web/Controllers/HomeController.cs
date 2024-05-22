@@ -88,74 +88,48 @@ namespace EM.Web.Controllers
 
 
         [HttpPost]
-        public IActionResult Cadastro(Aluno Aluno)
+        public IActionResult Cadastro(Aluno aluno)
         {
-            var alunoExiste = _rep.Obtenha(Aluno.Matricula.ToString());
-            object alunoMatricula = _rep.ObtenhaMatricula(Aluno.Matricula);
+            // Obtém um aluno existente pela matrícula
+            Aluno alunoExistente = _rep.Obtenha(aluno.Matricula.ToString());
 
-            /*if(alunoMatricula != null)
+            // Cria ou atualiza os dados do aluno
+            Aluno novoAluno = new Aluno
             {
-                ViewBag.Mensagem = "Matrícula em uso!";
-                return View();
-            }*/
-            if (alunoExiste == null)
-            {
-                var aluno = new Aluno()
-                {
-                    Matricula = Aluno.Matricula,
-                    Nome = Aluno.Nome?.ToUpper().Trim(),
-                    Sexo = Aluno.Sexo,
-                    CPF = Aluno.CPF,
-                    Nascimento = Aluno.Nascimento,
-                    CEP = Aluno.CEP,
-                    Logradouro = Aluno.Logradouro,
-                    Bairro = Aluno.Bairro,
-                    Cidade = Aluno.Cidade,
-                    Estado = Aluno.Estado,
+                Matricula = aluno.Matricula,
+                Nome = aluno.Nome?.ToUpper().Trim(),
+                Sexo = aluno.Sexo,
+                CPF = aluno.CPF,
+                Nascimento = aluno.Nascimento,
+                CEP = aluno.CEP,
+                Logradouro = aluno.Logradouro,
+                Bairro = aluno.Bairro,
+                Cidade = aluno.Cidade,
+                Estado = aluno.Estado,
+            };
 
-                    
-                };
-                if (Aluno.Matricula == aluno.Matricula)
-                {
-                      _rep.Adicione(aluno);
-                        ViewBag.Mensagem = "Cadastrado!";
-                }
-                return View();
+            if (string.IsNullOrWhiteSpace(novoAluno.Nome))
+            {
+                ViewBag.Mensagem = "Favor preencha o nome!";
+                return View(aluno);
+            }
+
+            if (alunoExistente == null)
+            {
+                _rep.Adicione(novoAluno);
+                ViewBag.Mensagem = "Cadastrado!";
+                ViewBag.Sucesso = true;
             }
             else
             {
-                var aluno = new Aluno()
-                {
-                    Matricula = Aluno.Matricula,
-                    Nome = Aluno.Nome?.ToUpper().Trim(),
-                    Sexo = Aluno.Sexo,
-                    CPF = Aluno.CPF,
-                    Nascimento = Aluno.Nascimento,
-                    CEP = Aluno.CEP,
-                    Logradouro = Aluno.Logradouro,
-                    Bairro = Aluno.Bairro,
-                    Cidade = Aluno.Cidade,
-                    Estado = Aluno.Estado,
-                };
-                if (aluno.Matricula == aluno.Matricula && !string.IsNullOrWhiteSpace(aluno.Nome))
-                {
-                   
-                        _rep.Atualize(aluno);
-
-                    ViewBag.Mensagem = "Atualizado!";
-                    return View();
-                    // return RedirectToAction("Index","Home");
-                   
-
-                }
-                else
-                {
-                    ViewBag.Mensagem = "Favor preencha o nome!";
-                    return View();
-                }
-               
+                _rep.Atualize(novoAluno);
+                ViewBag.Mensagem = "Atualizado!";
+                ViewBag.Sucesso = true;
             }
+            return View();
+            /*return RedirectToAction("Index", "Home");*/
         }
+
 
 
         public IActionResult Deletar(string id)
