@@ -3,7 +3,6 @@ using EM.Domain.ProjetoEM.EM.Domain;
 using EM.Repository;
 using EM.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics;
 
 namespace EM.Web.Controllers
